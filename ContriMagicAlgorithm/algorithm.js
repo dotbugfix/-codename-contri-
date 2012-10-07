@@ -1,13 +1,13 @@
 /*
  * Contri Magic Algorithm
- * v1.1
+ * v1.2
  * Author: Omkar Ekbote
  * Editors: *
- * What's new: Added give/take transactions to per-participant list
+ * What's new: Corrected give/take transactions label
  * Purpose: Improve display for analysis
  * To-Do: Improve transaction() and theEnd() functions
  *
- * 14/Jul/2012 03:07AM
+ * 14/Jul/2012 03:14AM
 */
 
 
@@ -166,9 +166,9 @@ function finalize(){
 			cell.setAttribute('id','transactioncell'+(i*10)+j);
 			document.getElementById("transactionsRow"+i).appendChild(cell);
 			if(transactions[i][j]<0)
-				document.getElementById('transactioncell'+(i*10)+j).innerHTML='gives '+Math.abs(transactions[i][j]);
+				document.getElementById('transactioncell'+(i*10)+j).innerHTML='takes '+Math.abs(transactions[i][j]);
 			else
-				document.getElementById('transactioncell'+(i*10)+j).innerHTML='takes '+transactions[i][j];
+				document.getElementById('transactioncell'+(i*10)+j).innerHTML='gives '+transactions[i][j];
 		}
 	}
 };
