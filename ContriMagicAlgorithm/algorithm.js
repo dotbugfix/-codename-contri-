@@ -1,13 +1,13 @@
 /*
  * Contri Magic Algorithm
- * v1.0
+ * v1.1
  * Author: Omkar Ekbote
  * Editors: *
- * What's new: Basic structure & nomencature
- * Purpose: Created UI interaction & display semantics
+ * What's new: Added give/take transactions to per-participant list
+ * Purpose: Improve display for analysis
  * To-Do: Improve transaction() and theEnd() functions
  *
- * 14/Jul/2012 02:53AM
+ * 14/Jul/2012 03:07AM
 */
 
 
@@ -84,6 +84,7 @@ function compute(){
 		cash[giver]-=toGive;
 		cash[receiver]+=toGive;
 		transactions[giver][numTransactions[giver]++]=toGive;
+		transactions[receiver][numTransactions[receiver]++]=-(toGive);
 	/*Write transaction*/
 		transactionRow=document.createElement("tr");
 		transactionRow.setAttribute('id','transactionRow'+i);
@@ -138,6 +139,7 @@ function finalize(){
 	for(i=0;i<7;i++){
 		totalTransactions+=numTransactions[i];
 	}
+	totalTransactions=totalTransactions/2;
 /*Write total no. of transactions*/
 	document.getElementById("result").appendChild(document.createElement('br'));
 	document.getElementById("result").appendChild(document.createTextNode("Total No. of Transactions = "+totalTransactions));
@@ -163,7 +165,10 @@ function finalize(){
 			cell=document.createElement("td");
 			cell.setAttribute('id','transactioncell'+(i*10)+j);
 			document.getElementById("transactionsRow"+i).appendChild(cell);
-			document.getElementById('transactioncell'+(i*10)+j).innerHTML=transactions[i][j];
+			if(transactions[i][j]<0)
+				document.getElementById('transactioncell'+(i*10)+j).innerHTML='gives '+Math.abs(transactions[i][j]);
+			else
+				document.getElementById('transactioncell'+(i*10)+j).innerHTML='takes '+transactions[i][j];
 		}
 	}
 };
